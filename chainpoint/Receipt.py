@@ -1,22 +1,1 @@
-from datetime import datetime
-from chainpoint.run import db
-from sqlalchemy import DateTime
-
-
-class Receipt(db.Model):
-
-    id = db.Column(db.Integer, primary_key=True)
-
-    # header
-    chainpoint_version = db.Column(db.Integer, primary_key=True)
-    hash_type = db.Column(db.String(35))
-    merkle_root = db.Column(db.String(64))
-    local_time = db.Column(DateTime, default=datetime.utcnow)
-
-    # target
-    target_hash = db.Column(db.String(64))
-    target_proof = db.Column(db.LargeBinary)
-    uri = db.Column(db.String(2083))  # max length of URL - 2,083 characters
-
-    def __init__(self):
-        pass
+import jsonimport jsonschemafrom datetime import datetimefrom chainpoint.run import dbfrom sqlalchemy import DateTimeclass Receipt(db.Model):    id = db.Column(db.Integer, primary_key=True)    # header    chainpoint_version = db.Column(db.Integer, primary_key=True)    hash_type = db.Column(db.String(35))    merkle_root = db.Column(db.String(64))    local_time = db.Column(DateTime, default=datetime.utcnow)    # target    target_hash = db.Column(db.String(64))    target_proof = db.Column(db.LargeBinary)    uri = db.Column(db.String(2083))  # max length of URL - 2,083 characters    # extras    extra_data = db.Column(db.LargeBinary)    raw_json = db.Column(db.LargeBinary)    def __init__(self):        pass    def loads(self, raw_json):        """Turns raw JSON data into a JSON object."""        # take in the data        self.raw_json = json.loads(raw_json)        # validate the data        schema = {            "type" : "object",            "header" : {                 "chainpoint_version" : {"type" : "number"},                 "name" : {"type" : "string"},            },        }
