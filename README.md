@@ -39,7 +39,7 @@ using math to verify the data.
 | hash_type | hashing algorithm used to encrypt target data (sha-256) |
 | merkle_root |  root of the Merkle Tree that is published in the blockchain  |
 | tx_id | transaction id where the Merkle Root is stored |
-| local_time  | non-authoritative Unix timestamp of the target |
+| timestamp  | non-authoritative Unix timestamp of the target |
 
 |  Target |   |
 |---|---|
