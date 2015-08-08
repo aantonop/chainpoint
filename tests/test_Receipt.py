@@ -13,4 +13,5 @@ class ReceiptTest(unittest.TestCase):
         db.drop_all()
 
     def test_new_receipt(self):
+        raw_rec = ""
         rec = Receipt()
